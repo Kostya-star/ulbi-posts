@@ -1,22 +1,21 @@
 <script setup lang="ts">
 import PostItem from '@/components/post-item.vue'
+import { type PostType } from '@/types/Post'
 
-interface Post {
-  id: number;
-  title: string;
-  descr: string;
-}
-
-defineProps<{
-  posts: Post[];
+const props = defineProps<{
+  posts: PostType[];
 }>()
+const emit = defineEmits(['update:posts'])
 
+function deletePost(postId: number) {
+  emit('update:posts', props.posts.filter(post => post.id !== postId))
+}
 </script>
 
 <template>
   <div class="post-list">
     <div class="posts-title">Users Posts</div>
-    <post-item v-for="post in posts" :key="post.id" :title="post.title" :descr="post.descr" />
+    <post-item v-for="post in posts" :key="post.id" :post="post" @delete-post="deletePost" />
   </div>
 </template>
 

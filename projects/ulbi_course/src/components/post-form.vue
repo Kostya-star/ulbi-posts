@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
-interface Post {
-  id: number;
-  title: string;
-  descr: string;
-}
+import { type PostType } from '@/types/Post'
 
 const props = defineProps<{
-  posts: Post[];
+  posts: PostType[];
 }>()
 
 const emit = defineEmits(['update:posts'])
@@ -38,7 +33,7 @@ function addPost() {
         name="postTitle" placeholder="Post Title">
       <input :value="postDescr" @input="postDescr = ($event.target as HTMLInputElement).value" type="text"
         name="postDescr" placeholder="Post Description">
-      <button @click="addPost" :disabled="!postTitle.trim() || !postDescr.trim()">Add Post</button>
+      <v-button @click="addPost" :disabled="!postTitle.trim() || !postDescr.trim()">Add Post</v-button>
     </form>
   </div>
 </template>

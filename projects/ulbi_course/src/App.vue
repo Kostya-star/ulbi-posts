@@ -31,7 +31,7 @@ const posts = ref([
 <template>
   <div class="content">
     <post-form v-model:posts="posts" />
-    <post-list :posts="posts" />
+    <post-list v-model:posts="posts" />
   </div>
 </template>
 
