@@ -1,30 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import PostForm from '@/components/post-form.vue'
 import PostList from '@/components/post-list.vue';
+import axios from 'axios'
+import { type PostType } from '@/types/Post'
 
-const posts = ref([
-  {
-    id: 1,
-    title: 'post1',
-    descr: 'post one descr'
-  },
-  {
-    id: 2,
-    title: 'post2',
-    descr: 'post two descr'
-  },
-  {
-    id: 3,
-    title: 'post3',
-    descr: 'post three descr'
-  },
-  {
-    id: 4,
-    title: 'post4',
-    descr: 'post four descr'
-  },
-])
+const posts = ref<PostType[]>([])
+
+onMounted(() => {
+  fetchPosts()
+})
+
+async function fetchPosts() {
+  try {
+    const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+      params: {
+        _limit: 10
+      }
+    })
+
+    posts.value = data
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 </script>
 

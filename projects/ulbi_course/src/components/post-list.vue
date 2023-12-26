@@ -13,7 +13,8 @@ function deletePost(postId: number) {
 </script>
 
 <template>
-  <div class="post-list">
+  <h1 v-if="!posts.length">No Posts Yet</h1>
+  <div v-else class="post-list">
     <div class="posts-title">Users Posts</div>
     <post-item v-for="post in posts" :key="post.id" :post="post" @delete-post="deletePost" />
   </div>

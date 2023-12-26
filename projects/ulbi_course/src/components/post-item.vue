@@ -11,7 +11,7 @@ defineEmits(['delete-post'])
   <div class="post">
     <div>
       <h2>{{ post.title }}</h2>
-      <p>{{ post.descr }}</p>
+      <p>{{ post.body }}</p>
     </div>
     <v-button @click="$emit('delete-post', post.id)">Delete</v-button>
   </div>
