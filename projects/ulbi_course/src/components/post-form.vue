@@ -4,13 +4,13 @@ import { type PostType } from '@/types/Post'
 
 const props = defineProps<{
   posts: PostType[];
+  isDialogOpen: boolean;
 }>()
 
-const emit = defineEmits(['update:posts'])
+const emit = defineEmits(['update:posts', 'update:is-dialog-open'])
 
 const postTitle = ref('');
 const postBody = ref('');
-const isDialogOpen = ref(false);
 
 function addPost() {
   const newPost = {
@@ -21,7 +21,7 @@ function addPost() {
   }
 
   emit('update:posts', [...props.posts, newPost])
-  isDialogOpen.value = false
+  emit('update:is-dialog-open', false)
   postTitle.value = ''
   postBody.value = ''
 }
@@ -29,12 +29,7 @@ function addPost() {
 </script>
 
 <template>
-  <div class="add-post-btn">
-    <v-button @click="isDialogOpen = true">
-      Add Post
-    </v-button>
-  </div>
-  <v-dialog v-model="isDialogOpen">
+  <v-dialog :is-dialog-open="isDialogOpen" @close-dialog="$emit('update:is-dialog-open', false)">
     <div class="add-post-form">
       <div class="form-title">Create new post</div>
       <form @submit.prevent class="form">

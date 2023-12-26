@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineProps<{
-  modelValue: boolean;
+  isDialogOpen: boolean;
 }>()
 
-defineEmits(['update:model-value'])
+defineEmits(['close-dialog'])
 </script>
 
 <template>
-  <div v-if="modelValue" class="dialog" @click="$emit('update:model-value', false)">
+  <div v-if="isDialogOpen" class="dialog" @click="$emit('close-dialog')">
     <div class="dialog-content" @click.stop>
       <slot />
     </div>
