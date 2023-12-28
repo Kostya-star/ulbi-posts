@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { type PostType } from '@/types/Post'
 
 const props = defineProps<{
@@ -33,7 +33,7 @@ function addPost() {
     <div class="add-post-form">
       <div class="form-title">Create new post</div>
       <form @submit.prevent class="form">
-        <v-input v-model="postTitle" type="text" name="postTitle" placeholder="Post Title" />
+        <v-input v-model="postTitle"  type="text" name="postTitle" placeholder="Post Title" />
         <v-input v-model="postBody" type="text" name="postDescr" placeholder="Post Description" />
         <v-button @click="addPost" :disabled="!postTitle.trim() || !postBody.trim()">Add Post</v-button>
       </form>
@@ -42,10 +42,6 @@ function addPost() {
 </template>
 
 <style scoped lang="scss">
-.add-post-btn {
-  display: flex;
-  justify-content: end;
-}
 .add-post-form {
   display: flex;
   flex-direction: column;

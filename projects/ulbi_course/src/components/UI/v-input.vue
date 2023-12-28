@@ -6,20 +6,16 @@ defineProps<{
   name: string
 }>()
 
+defineEmits(['update:model-value'])
 </script>
 
 <template>
-  <input 
-    :value="modelValue" 
-    @input="$emit('update:model-value', ($event.target as HTMLInputElement).value)" 
-    :type="type"
-    :name="name" 
-    class='input'
-    :placeholder="placeholder">
+  <input :value="modelValue" @input="$emit('update:model-value', ($event.target as HTMLInputElement).value)" :type="type"
+    :name="name" class='input' :placeholder="placeholder">
 </template>
 
 <style lang="scss" scoped>
-  .input {
-    padding: 10px;
-  }
+.input {
+  padding: 10px;
+}
 </style>

@@ -10,10 +10,14 @@ defineEmits(['delete-post'])
 <template>
   <div class="post">
     <div>
+      <span><strong>{{ post.id }}</strong></span>
       <h2>{{ post.title }}</h2>
       <p>{{ post.body }}</p>
     </div>
-    <v-button @click="$emit('delete-post', post.id)">Delete</v-button>
+    <div>
+      <v-button @click="$router.push(`/posts/${post.id}`)">Open</v-button>
+      <v-button @click="$emit('delete-post', post.id)">Delete</v-button>
+    </div>
   </div>
 </template>
 
